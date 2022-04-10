@@ -1,0 +1,51 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    background-color: teal;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 6em;
+}
+
+.content {
+    background-color: grey;
+    border: 10px solid black;
+    border-radius: 12px;
+    height: 525px;
+    width: 400px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+}
+
+header {
+    color: red;
+}
+
+.calcButtonDivs {
+    border: 1px solid black;
+    border-radius: 24x solid black;
+}
+
+#screen {
+    grid-column-start: span 4;
+    background-color: black;
+    height: 125px;
+    border: 2px solid black;
+    border-radius: 16px solid black;
+}
+
+#equals {
+    grid-row-start: span 2;
+}
+
+#zero {
+    grid-column-start: span 2;
+}
