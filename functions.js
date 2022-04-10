@@ -1,11 +1,13 @@
+
+/*-----------------------Calls when page refreshed--------------*/
 createCalculator();
 
-//creates calculator divs
+/*-----------------------Creates Calculator--------------*/
 function createCalculator() {
 
     const content = document.querySelector('.content');
 
-    for (let i = 0; i < 19; i++) {
+    for (let i = 0; i < 20; i++) {
         let calcButtonDivs = document.createElement('div');
         calcButtonDivs.className = 'calcButtonDivs';
         calcButtonDivs.id = 'div-' + `${(i+1)}`;
@@ -13,8 +15,7 @@ function createCalculator() {
     }
 }
 
-//populate buttons 
-
+/*-----------------------Populate Divs and Buttons--------------*/
 //screen
 const screen = document.querySelector('#div-1');
 screen.id = 'screen';
@@ -22,7 +23,7 @@ screen.id = 'screen';
 //plus-minus sign
 const plusMinus = document.querySelector('#div-2');
 plusMinus.id = 'plusMinus';
-plusMinus.textContent = '+/-';
+plusMinus.textContent = '+ / -';
 
 //percentage 
 
@@ -47,6 +48,7 @@ multiply.textContent = 'x';
 const seven = document.querySelector('#div-6');
 seven.id = 'seven';
 seven.textContent = '7';
+//seven.addEventListener('click', test, false);
 
 //eight
 const eight = document.querySelector('#div-7');
@@ -109,7 +111,13 @@ const zero = document.querySelector('#div-18');
 zero.id = 'zero';
 zero.textContent = '0';
 
+//decimal
+const decimal = document.querySelector('#div-19');
+decimal.id = 'decimal';
+decimal.textContent = '.';
+
+
 //clear 
-const clear = document.querySelector('#div-19');
+const clear = document.querySelector('#div-20');
 clear.id = 'clear';
 clear.textContent = 'C';

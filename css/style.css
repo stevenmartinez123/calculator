@@ -15,7 +15,7 @@ body {
 }
 
 .content {
-    background-color: grey;
+    background-color: black;
     border: 10px solid black;
     border-radius: 12px;
     height: 525px;
@@ -23,10 +23,6 @@ body {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(6, 1fr);
-}
-
-header {
-    color: red;
 }
 
 .calcButtonDivs {
@@ -37,15 +33,26 @@ header {
 #screen {
     grid-column-start: span 4;
     background-color: black;
-    height: 125px;
+    height: 135px;
     border: 2px solid black;
     border-radius: 16px solid black;
+    color: white;
+}
+
+#plusMinus, #percentage, #division, #multiply, 
+#seven, #eight, #nine, #subtract, #six, #five, 
+#four, #three, #two, #one, #zero, #clear, 
+#addition, #equals, #decimal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 32px;
+    font-weight: 400;
+    font-family: 'Helvetica';
+    border-radius: 4px;
+    background-color: lightgrey;
 }
 
 #equals {
-    grid-row-start: span 2;
-}
-
-#zero {
-    grid-column-start: span 2;
+    grid-row: span 2;
 }
