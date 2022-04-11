@@ -29,13 +29,13 @@ function operate() {
 
     switch (operand) {
 
-        case '+': result = parseInt(valueOne) + parseInt(valueTwo);
+        case '+': result = parseFloat(valueOne) + parseFloat(valueTwo);
             break;
-        case '-': result = parseInt(valueOne) - parseInt(valueTwo);
+        case '-': result = parseFloat(valueOne) - parseFloat(valueTwo);
             break;
-        case 'x': result = parseInt(valueOne) * parseInt(valueTwo);
+        case 'x': result = parseFloat(valueOne) * parseFloat(valueTwo);
             break;
-        case '÷': result =  valueTwo == '0' ? 'NO BRATHA': parseInt(valueOne) / parseInt(valueTwo);
+        case '÷': result =  valueTwo == '0' ? 'NO BRATHA': parseFloat(valueOne) / parseFloat(valueTwo);
             break; 
         }
 
@@ -229,7 +229,6 @@ function displayOnScreen() {
             screen.textContent = operationHistory[2];
         }
     }
-    console.table(operationHistory);
 }
 
 /*--------makes numbers on screen negative or positive--------------*/
@@ -275,7 +274,6 @@ function makePercentage() {
     //second param in operationsHistory updated if updating second param
     if (operationHistory[2] != undefined) {
         operationHistory[2] = screen.textContent;
-        console.table(operationHistory);
     }
 
 }
@@ -295,5 +293,4 @@ function operandClicked(operand) {
     }
     operationHistory[0] = screen.textContent;
     operationHistory[1] = this.textContent;
-    console.table(operationHistory);
 }
