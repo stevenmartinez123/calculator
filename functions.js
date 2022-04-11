@@ -91,11 +91,14 @@ eight.id = 'eight';
 eight.textContent = '8';
 eight.addEventListener('click', displayOnScreen);
 
+
+
 //nine
 const nine = document.querySelector('#div-8');
 nine.id = 'nine';
 nine.textContent = '9';
 nine.addEventListener('click', displayOnScreen);
+
 
 //subtract
 const subtract = document.querySelector('#div-9');
@@ -109,6 +112,7 @@ const six = document.querySelector('#div-10');
 six.id = 'six';
 six.textContent = '6';
 six.addEventListener('click', displayOnScreen);
+
 
 //five
 const five = document.querySelector('#div-11');
@@ -134,6 +138,7 @@ const three = document.querySelector('#div-14');
 three.id = 'three';
 three.textContent = '3';
 three.addEventListener('click', displayOnScreen);
+
 
 //two
 const two = document.querySelector('#div-15');
@@ -280,17 +285,113 @@ function makePercentage() {
 
 /*--------stores original param and operand in an array-----*/
 
-function operandClicked(operand) {
-
+function operandClicked() {
+    //if no values on screen return nothing
     if (screen.textContent.length < 1) {
         return;
     }
-
+    //if second param has a value compute then update operand
     if (operationHistory[2] != undefined) {
         operate();
         operationHistory[1] = this.textContent;
         return;
     }
+    //update first param and operand in array 
     operationHistory[0] = screen.textContent;
     operationHistory[1] = this.textContent;
 }
+
+window.addEventListener('keydown', event => {
+
+    let key = event.key.toLowerCase();
+
+    switch(key) {
+
+        case ('0'): 
+        this.textContent = '0';
+        displayOnScreen();
+        break;
+
+        case ('1'): 
+        this.textContent = '1';
+        displayOnScreen();
+        break;  
+
+        case ('2'): 
+        this.textContent = '2';
+        displayOnScreen();
+        break;     
+        
+        case ('3'): 
+        this.textContent = '3';
+        displayOnScreen();
+        break;     
+        
+        case ('4'): 
+        this.textContent = '4';
+        displayOnScreen();
+        break;     
+        
+        case ('5'): 
+        this.textContent = '5';
+        displayOnScreen();
+        break;     
+        
+        case ('6'): 
+        this.textContent = '6';
+        displayOnScreen();
+        break;
+
+        case ('7'): 
+        this.textContent = '7';
+        displayOnScreen();
+        break;
+
+        case ('8'): 
+        this.textContent = '8';
+        displayOnScreen();
+        break;
+
+        case ('9'): 
+        this.textContent = '9';
+        displayOnScreen();
+        break;
+
+        case ('x'): 
+        this.textContent = 'x'
+        operandClicked();
+        break;
+
+        case ('+'): 
+        this.textContent = '+'
+        operandClicked();
+        break;
+
+        case ('-'): 
+        this.textContent = '-'
+        operandClicked();
+        break;
+
+        case ('/'): 
+        this.textContent = '÷'
+        operandClicked();
+        break;
+
+        case ('%'): 
+        this.textContent = screen.textContent;
+        makePercentage();
+        break;
+
+        case('enter'): 
+        operate();
+        break;
+
+        case ('c'): 
+        clearScreen();
+        break;
+
+        case('.'):
+        this.textContent = key;
+        addDecimal();
+    }
+ });
