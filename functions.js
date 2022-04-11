@@ -1,4 +1,4 @@
-/*-----------------------Calls when page refreshed--------------*/
+//Calls when page refreshed
 createCalculator();
 
 //global array to save history of operations 
@@ -19,28 +19,34 @@ function createCalculator() {
 
 /*-----------------------takes two numbers and returns results depending on operand--------------*/
 
-function operate(valueOne, operation, valueTwo) {
+function operate() {
+
+    let valueOne = operationHistory[0];
+    let operand = operationHistory[1];
+    let valueTwo = operationHistory[2];
 
     var result = 0; 
 
-    switch (operation) {
+    switch (operand) {
 
         case '+': result = parseInt(valueOne) + parseInt(valueTwo);
             break;
         case '-': result = parseInt(valueOne) - parseInt(valueTwo);
             break;
-        case '*': result = parseInt(valueOne) * parseInt(valueTwo);
+        case 'x': result = parseInt(valueOne) * parseInt(valueTwo);
             break;
-        case '/': result =  parseInt(valueOne) / parseInt(valueTwo);
-            break;
-        default: 
-            return;  
+        case '÷': result =  valueTwo == '0' ? 'NO BRATHA': parseInt(valueOne) / parseInt(valueTwo);
+            break; 
         }
-        return result;
-}
+
+    screen.textContent = result.toString();
+    operationHistory[0] = typeof(result) == 'number' ? result.toString() : undefined;
+    operationHistory[1] = undefined;
+    operationHistory[2] = undefined;
+}   
 
 
-/*-----------------------Populate Divs and Buttons--------------*/
+/*-----------------------rename Div ID's, add text, and add event listeners--------------*/
 //screen
 const screen = document.querySelector('#div-1');
 screen.id = 'screen';
@@ -145,6 +151,7 @@ one.addEventListener('click', displayOnScreen);
 const equals = document.querySelector('#div-17');
 equals.id = 'equals';
 equals.textContent = '=';
+equals.addEventListener('click', operate);
 
 //zero
 const zero = document.querySelector('#div-18');
@@ -247,6 +254,10 @@ function makeNegativeOrPositive() {
         currentNum = ('-').concat(currentNum.substring(0,8));
         screen.textContent = currentNum;
     }
+    //second param in operationsHistory updated if updating second param
+    if (operationHistory[2] != undefined) {
+        operationHistory[2] = screen.textContent;
+    }
 }
 
 /*--------converts number on screen to a percentage--------------*/
@@ -260,11 +271,26 @@ function makePercentage() {
         return;
     }
     screen.textContent = numOnScreen;
+
+    //second param in operationsHistory updated if updating second param
+    if (operationHistory[2] != undefined) {
+        operationHistory[2] = screen.textContent;
+        console.table(operationHistory);
+    }
+
 }
+
+/*--------stores original param and operand in an array-----*/
 
 function operandClicked(operand) {
 
     if (screen.textContent.length < 1) {
+        return;
+    }
+
+    if (operationHistory[2] != undefined) {
+        operate();
+        operationHistory[1] = this.textContent;
         return;
     }
     operationHistory[0] = screen.textContent;

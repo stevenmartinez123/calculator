@@ -39,10 +39,9 @@ body {
     grid-column-start: span 4;
     background-color: black;
     height: 135px;
-    border: 2px solid black;
-    border-radius: 16px solid black;
     color: red;
     display: flex;
+    border: 2px solid black;
     justify-content: end;
     align-items: end;
     font-size: 84px;
