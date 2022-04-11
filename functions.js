@@ -1,6 +1,8 @@
-
 /*-----------------------Calls when page refreshed--------------*/
 createCalculator();
+
+//global array to save history of operations 
+var operationHistory = new Array(3);
 
 /*-----------------------Creates Calculator--------------*/
 function createCalculator() {
@@ -61,12 +63,14 @@ percentage.addEventListener('click', makePercentage);
 const division = document.querySelector('#div-4');
 division.id = 'division';
 division.textContent = '÷';
+division.addEventListener('click', operandClicked);
 
 //multiply
 
 const multiply = document.querySelector('#div-5');
 multiply.id = 'multiply';
 multiply.textContent = 'x';
+multiply.addEventListener('click', operandClicked);
 
 //seven
 
@@ -91,6 +95,8 @@ nine.addEventListener('click', displayOnScreen);
 const subtract = document.querySelector('#div-9');
 subtract.id = 'subtract';
 subtract.textContent = '-';
+subtract.addEventListener('click', operandClicked);
+
 
 //six
 const six = document.querySelector('#div-10');
@@ -115,6 +121,7 @@ four.addEventListener('click', displayOnScreen);
 const addition = document.querySelector('#div-13');
 addition.id = 'addition';
 addition.textContent = '+';
+addition.addEventListener('click', operandClicked);
 
 //three
 const three = document.querySelector('#div-14');
@@ -162,10 +169,23 @@ clear.addEventListener('click', clearScreen);
 
 function addDecimal() {
     let screen = document.querySelector('#screen');
-    if (screen.textContent.includes('.')) {
+    //if still on first param of numbers add no other decmials 
+    if (screen.textContent.includes('.') && operationHistory[1] == undefined) {
         return;
-    } else if (screen.textContent.length < 9) {
+    //if still on first param add to text content 
+    } else if (screen.textContent.length < 9 && operationHistory[1] == undefined) {
     screen.textContent = screen.textContent.concat(this.textContent);
+    //if on second param and nothing yet entered value will be "0."
+    } else if (screen.textContent.length < 9 && operationHistory[2] == undefined){
+        operationHistory[2] = "0.";
+        screen.textContent = "0.";
+    //if second param already has decimal return 
+    } else if (screen.textContent.length < 9 && screen.textContent.includes('.')) {
+        return;
+    //else add decimal to second param number
+    } else if (screen.textContent.length < 9) {
+        operationHistory[2] = screen.textContent.concat(this.textContent);
+        screen.textContent = operationHistory[2];
     }
 }
 
@@ -173,6 +193,7 @@ function addDecimal() {
 function clearScreen() {
     let screen = document.querySelector('#screen');
     screen.textContent = '';
+    operationHistory = new Array(3);
 }
 
 /*-----------------------Displays digits on screen--------------*/
@@ -184,12 +205,25 @@ function displayOnScreen() {
     if (screen.textContent == '0') {
         screen.textContent = '';
     }
-    //prevents number overflow
-    if (screenLength < 9) {
-        screen.textContent = screen.textContent.concat(this.textContent);
-    }
-}
 
+    //prevents number overflow
+    if (screenLength < 9 && operationHistory[1] == undefined) {
+        screen.textContent = screen.textContent.concat(this.textContent);
+    } else if (screenLength < 9 && operationHistory[1].length > 0) {
+
+        if (operationHistory[2] == undefined) {
+            screen.textContent = "";
+            operationHistory[2] = this.textContent;
+            screen.textContent = this.textContent;
+        } else {
+            let addValue = this.textContent;
+            let screenValue = screen.textContent;
+            operationHistory[2] = screenValue.concat(addValue);
+            screen.textContent = operationHistory[2];
+        }
+    }
+    console.table(operationHistory);
+}
 
 /*--------makes numbers on screen negative or positive--------------*/
 
@@ -228,3 +262,12 @@ function makePercentage() {
     screen.textContent = numOnScreen;
 }
 
+function operandClicked(operand) {
+
+    if (screen.textContent.length < 1) {
+        return;
+    }
+    operationHistory[0] = screen.textContent;
+    operationHistory[1] = this.textContent;
+    console.table(operationHistory);
+}
