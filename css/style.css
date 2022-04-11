@@ -3,6 +3,11 @@
     margin: 0;
 }
 
+@font-face {
+    font-family: 'digital-font';
+    src: url(../digital-7/digital-7.ttf);
+}
+
 body {
     background-color: teal;
 }
@@ -36,7 +41,15 @@ body {
     height: 135px;
     border: 2px solid black;
     border-radius: 16px solid black;
-    color: white;
+    color: red;
+    display: flex;
+    justify-content: end;
+    align-items: end;
+    font-size: 84px;
+    padding-right: 5px;
+    padding-bottom: 5px;
+    letter-spacing: 2px;
+    font-family: 'digital-font';
 }
 
 #plusMinus, #percentage, #division, #multiply, 
