@@ -21,9 +21,9 @@ function createCalculator() {
 
 function operate() {
 
-    let valueOne = operationHistory[0];
-    let operand = operationHistory[1];
-    let valueTwo = operationHistory[2];
+    let valueOne = operationHistory[0]; //first parameter
+    let operand = operationHistory[1]; //operand
+    let valueTwo = operationHistory[2]; //second parameter
 
     var result = 0; 
 
@@ -39,9 +39,12 @@ function operate() {
             break; 
         }
 
-    screen.textContent = result.toString();
-    operationHistory[0] = typeof(result) == 'number' ? result.toString() : undefined;
-    operationHistory[1] = undefined;
+        if (result.toString().length >= 7 && !result.toString == 'NO BRATHA') { //if the length of the number is larger than seven decimal prefixed to 2
+            result = result.toFixed(2);
+        }
+    screen.textContent = result.toString(); //outputs result on screen 
+    operationHistory[0] = typeof(result) == 'number' ? result.toString() : undefined; //stores result as first param 
+    operationHistory[1] = undefined; //operand and second parameter resets 
     operationHistory[2] = undefined;
 }   
 
@@ -204,8 +207,10 @@ function addDecimal() {
 /*-----------------------Clears display screen--------------*/
 function clearScreen() {
     let screen = document.querySelector('#screen');
-    screen.textContent = '';
-    operationHistory = new Array(3);
+    screen.textContent = ''; //cleares screen and resets array
+    operationHistory = array.forEach(element => {
+        element = undefined;
+    });
 }
 
 /*-----------------------Displays digits on screen--------------*/
@@ -219,15 +224,15 @@ function displayOnScreen() {
     }
 
     //prevents number overflow
-    if (screenLength < 9 && operationHistory[1] == undefined) {
+    if (screenLength < 9 && operationHistory[1] == undefined) { //if on first parameter and less than 9 digit add to number
         screen.textContent = screen.textContent.concat(this.textContent);
-    } else if (screenLength < 9 && operationHistory[1].length > 0) {
-
+    } else if (screenLength < 9 && operationHistory[1].length > 0) { //if on second parameter...
+        //if first entry in second parameter resets screen and inputs new digit in second parameter 
         if (operationHistory[2] == undefined) {
             screen.textContent = "";
             operationHistory[2] = this.textContent;
             screen.textContent = this.textContent;
-        } else {
+        } else { //concats new digit to second parameter 
             let addValue = this.textContent;
             let screenValue = screen.textContent;
             operationHistory[2] = screenValue.concat(addValue);
@@ -300,6 +305,8 @@ function operandClicked() {
     operationHistory[0] = screen.textContent;
     operationHistory[1] = this.textContent;
 }
+
+/*--------keyboard support for calculator-----*/
 
 window.addEventListener('keydown', event => {
 
