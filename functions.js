@@ -362,6 +362,11 @@ window.addEventListener('keydown', event => {
         operandClicked();
         break;
 
+        case ('*'): 
+        this.textContent = 'x'
+        operandClicked();
+        break;
+
         case ('+'): 
         this.textContent = '+'
         operandClicked();

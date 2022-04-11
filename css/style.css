@@ -9,7 +9,7 @@
 }
 
 body {
-    background-color: teal;
+    background-color: #008080;
 }
 
 .container {
@@ -39,7 +39,7 @@ body {
     grid-column-start: span 4;
     background-color: black;
     height: 135px;
-    color: red;
+    color: ivory;
     display: flex;
     border: 2px solid black;
     justify-content: end;
@@ -67,4 +67,11 @@ body {
 
 #equals {
     grid-row: span 2;
+    background-color: orange;
+}
+
+#addition, #multiply, #division, #subtract, #percentage, #plusMinus {
+    background-color: #2C4454;
+    color: white;
+    /*#C0D0A6;*/
 }
